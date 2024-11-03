@@ -1,5 +1,5 @@
 # PracticaLAMP
 En este proyecto crearemos una configuración LAMP con dos máquinas: una para Apache y otra para MySQL. Cada una tendrá una IP estática en una red privada, y la máquina Apache también tendrá salida a Internet. El propósito es usar Vagrant para configurar y desplegar un entorno LAMP (Linux, Apache, MySQL, PHP) distribuido, simulando un entorno de producción mediante la separación del servidor web y la base de datos.
 
-Vagrantfile:
+# Vagrantfile
 Aquí configuramos las máquinas virtuales, especificando la red y el aprovisionamiento. El Vagrantfile establece dos máquinas virtuales: una para el servidor web (Apache) y otra para la base de datos (MySQL). A cada máquina se le asigna una IP privada y se configura una red compartida entre ambas, llamada "AntonioRed". Cabe mencionar que no pude nombrar las máquinas como AntonioZancadaApache y AntonioZancadaMysql, ya que al ejecutar vagrant up, el proceso se detenía. Sin embargo, al cambiar los nombres a Apache y Mysql, funcionó correctamente. Por lo tanto, los nombres de host de ambas máquinas son los especificados en la práctica (AntonioZancadaApache y AntonioZancadaMysql).
