@@ -23,7 +23,7 @@ sudo apt-get install -y apache2 php libapache2-mod-php php-mysql git
 ````bash
 sudo apt-get install net-tools
 ````
-### Clona el repositorio iaw-practica-lamp desde GitHub en el directorio /var/www/actividadlap/.
+### Clona el repositorio iaw-practica-lamp desde GitHub en el directorio /var/www/actividadlamp/.
 ````bash
 git clone https://github.com/josejuansanchez/iaw-practica-lamp.git /var/www/actividadlamp/
 ````
