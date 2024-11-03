@@ -14,3 +14,5 @@ Aquí se instala Apache, PHP, MySQL y Git en una máquina, clona un repositorio 
 ### Actualizar la lista de paquetes
 ```bash
 sudo apt-get update
+
+
