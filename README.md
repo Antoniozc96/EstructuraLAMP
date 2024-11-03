@@ -8,6 +8,7 @@ Este bloque de código en Vagrant configura dos máquinas virtuales con Ubuntu. 
 
 # **Aprovisionamiento apache: provapache.sh**
 Aquí se instala Apache, PHP, MySQL y Git en una máquina, clona un repositorio desde GitHub y mueve los archivos necesarios a un directorio específico. Luego, configura los permisos y ajusta la configuración de Apache para apuntar al nuevo directorio de la aplicación. Finalmente, recarga Apache para aplicar los cambios y crea un archivo de configuración PHP con los detalles de la conexión a la base de datos.
+![imagen](https://github.com/user-attachments/assets/eef069a0-2af1-4efb-9905-2d947e97eb5a)
 
 ## Configuración del entorno LAMP
 ### Actualiza la lista de paquetes disponibles y sus versiones.
@@ -76,6 +77,7 @@ sudo systemctl reload apache2
 
 # **Aprovisionamiento Mysql: provmysql.sh**
 Este script actualiza la lista de paquetes e instala MySQL Server, Git y herramientas de red. Luego, inicia el servicio de MySQL, clona un repositorio desde GitHub e importa una base de datos. También crea un usuario en MySQL con permisos específicos, modifica la configuración de MySQL para permitir conexiones remotas, y reinicia el servicio para aplicar los cambios. Finalmente, ajusta la configuración de red eliminando la ruta predeterminada.
+![imagen](https://github.com/user-attachments/assets/96593811-2d34-4785-8aec-ef3fba4a9fb1)
 
 ### Actualizar la lista de paquetes
 ````bash
