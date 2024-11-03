@@ -132,6 +132,10 @@ sudo ip route del default
 # Funcionamiento MySQL
 ![imagen](https://github.com/user-attachments/assets/3a3bb521-3766-4e26-96b6-2a51688d7da0)
 
+# A continuación se puede observar el correcto funcionamiento de la estructura:
+![imagen](https://github.com/user-attachments/assets/7cafa761-cf5b-4131-8b9d-3fa20a54cafd)
+
+
 
 
 
