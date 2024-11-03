@@ -125,6 +125,14 @@ sudo systemctl restart mysql
 sudo ip route del default
 ````
 
+#Funcionamiento Apache
+![imagen](https://github.com/user-attachments/assets/53e9c16a-4813-46bc-be30-f44dcc8b163c)
+
+
+#Funcionamiento MySQL
+![imagen](https://github.com/user-attachments/assets/3a3bb521-3766-4e26-96b6-2a51688d7da0)
+
+
 
 
 
