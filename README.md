@@ -9,85 +9,8 @@ Este bloque de código en Vagrant configura dos máquinas virtuales con Ubuntu. 
 ### **Aprovisionamiento apache: provapache.sh**
 Aquí se instala Apache, PHP, MySQL y Git en una máquina, clona un repositorio desde GitHub y mueve los archivos necesarios a un directorio específico. Luego, configura los permisos y ajusta la configuración de Apache para apuntar al nuevo directorio de la aplicación. Finalmente, recarga Apache para aplicar los cambios y crea un archivo de configuración PHP con los detalles de la conexión a la base de datos.
 
-* sudo apt-get update
+## Configuración del entorno LAMP
 
-Actualiza la lista de paquetes disponibles y sus versiones.
-bash
-
-sudo apt-get install -y apache2 php libapache2-mod-php php-mysql git
-
-Instala Apache, PHP, los módulos de PHP para Apache, el soporte PHP para MySQL y Git, todo de una vez.
-bash
-
-sudo apt-get install net-tools
-
-Instala herramientas de red, útiles para obtener información de la red.
-bash
-
-git clone https://github.com/josejuansanchez/iaw-practica-lamp.git /var/www/lamp_app/
-
-Clona el repositorio iaw-practica-lamp desde GitHub en el directorio /var/www/lamp_app/.
-bash
-
-sudo mv /var/www/lamp_app/src/* /var/www/lamp_app/
-
-Mueve todos los archivos desde el subdirectorio src al directorio principal lamp_app.
-bash
-
-sudo chown -R www-data.www-data /var/www/lamp_app/
-
-Cambia el propietario y el grupo del directorio lamp_app y sus contenidos a www-data, el usuario y grupo utilizado por el servidor web Apache.
-bash
-
-sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/practica.conf
-
-Copia el archivo de configuración por defecto de Apache, 000-default.conf, a un nuevo archivo llamado practica.conf.
-bash
-
-sudo sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/lamp_app|' /etc/apache2/sites-available/practica.conf
-
-Utiliza sed para modificar DocumentRoot en practica.conf, apuntando al directorio lamp_app.
-bash
-
-cd /etc/apache2/sites-available/
-
-Cambia el directorio de trabajo a /etc/apache2/sites-available/.
-bash
-
-sudo a2ensite practica.conf
-
-Habilita el nuevo sitio configurado en practica.conf.
-bash
-
-cd /etc/apache2/sites-enabled/
-
-Cambia el directorio de trabajo a /etc/apache2/sites-enabled/.
-bash
-
-sudo a2dissite 000-default.conf
-
-Deshabilita el sitio por defecto configurado en 000-default.conf.
-bash
-
-sudo systemctl reload apache2
-
-Recarga Apache para aplicar los cambios de configuración.
-bash
-
-cat <<EOL > /var/www/lamp_app/config.php
-<?php
-define('DB_HOST', '192.168.55.2');
-define('DB_NAME', 'lamp_db');
-define('DB_USER', 'antonio01');
-define('DB_PASSWORD', '12345');
-
-\$mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-?>
-EOL
-
-Crea un archivo de configuración PHP config.php con los detalles de la conexión a la base de datos y lo guarda en el directorio de la aplicación.
-bash
-
-sudo systemctl reload apache2
-
-Recarga Apache nuevamente para asegurarse de que todos los cambios se apliquen correctamente.
+### Actualizar la lista de paquetes
+```bash
+sudo apt-get update
