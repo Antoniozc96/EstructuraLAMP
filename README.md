@@ -126,10 +126,12 @@ sudo ip route del default
 ````
 
 # Funcionamiento Apache
+La salida indica que el servicio Apache está activo y funcionando correctamente, mostrando detalles sobre el proceso principal, el tiempo que lleva en ejecución, y el uso de memoria y CPU.
 ![imagen](https://github.com/user-attachments/assets/53e9c16a-4813-46bc-be30-f44dcc8b163c)
 
 
 # Funcionamiento MySQL
+La salida indica que el servicio Apache está activo y funcionando correctamente, mostrando detalles sobre el proceso principal, el tiempo que lleva en ejecución, y el uso de memoria y CPU
 ![imagen](https://github.com/user-attachments/assets/3a3bb521-3766-4e26-96b6-2a51688d7da0)
 
 # A continuación se puede observar el correcto funcionamiento de la estructura:
