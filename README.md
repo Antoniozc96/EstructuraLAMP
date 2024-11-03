@@ -33,7 +33,7 @@ sudo mv /var/www/actividadlamp/src/* /var/www/actividadlamp/
 ````
 ### Cambia el propietario y el grupo del directorio actividadlamp y sus contenidos a www-data, el usuario y grupo utilizado por el servidor web Apache.
 ````bash
-sudo chown -R www-data.www-data /var/www/actividadlamp/
+sudo chown -R www-data:www-data /var/www/actividadlamp/
 ````
 ### Copia el archivo de configuración por defecto de Apache, 000-default.conf, a un nuevo archivo llamado actividadlamp.conf.
 ````bash
@@ -41,7 +41,7 @@ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-availab
 ````
 ### Utiliza sed para modificar DocumentRoot en actividadlamp.conf, apuntando al directorio lamp_app.
 ````bash
-sudo sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/lamp_app|' /etc/apache2/sites-available/actividadlamp.conf
+sudo sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/actividadlamp|' /etc/apache2/sites-available/actividadlamp.conf
 ````
 ### Habilita el nuevo sitio configurado en actividadlamp.conf.
 ````bash
