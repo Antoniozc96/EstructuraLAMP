@@ -6,7 +6,7 @@ Este bloque de código en Vagrant configura dos máquinas virtuales con Ubuntu. 
 
 ![imagenVagrantfile](https://github.com/user-attachments/assets/5eb8d062-c53b-4fc7-9d63-119c81ffa68c)
 
-### **Aprovisionamiento apache: provapache.sh**
+# **Aprovisionamiento apache: provapache.sh**
 Aquí se instala Apache, PHP, MySQL y Git en una máquina, clona un repositorio desde GitHub y mueve los archivos necesarios a un directorio específico. Luego, configura los permisos y ajusta la configuración de Apache para apuntar al nuevo directorio de la aplicación. Finalmente, recarga Apache para aplicar los cambios y crea un archivo de configuración PHP con los detalles de la conexión a la base de datos.
 
 ## Configuración del entorno LAMP
@@ -22,30 +22,30 @@ sudo apt-get install -y apache2 php libapache2-mod-php php-mysql git
 ````bash
 sudo apt-get install net-tools
 ````
-### Clona el repositorio iaw-practica-lamp desde GitHub en el directorio /var/www/lamp_app/.
+### Clona el repositorio iaw-practica-lamp desde GitHub en el directorio /var/www/actividadlap/.
 ````bash
-git clone https://github.com/josejuansanchez/iaw-practica-lamp.git /var/www/lamp_app/
+git clone https://github.com/josejuansanchez/iaw-practica-lamp.git /var/www/actividadlamp/
 ````
-### Mueve todos los archivos desde el subdirectorio src al directorio principal lamp_app.
+### Mueve todos los archivos desde el subdirectorio src al directorio principal actividadlamp.
 ````bash
-sudo mv /var/www/lamp_app/src/* /var/www/lamp_app/
+sudo mv /var/www/actividadlamp/src/* /var/www/actividadlamp/
 ````
-### Cambia el propietario y el grupo del directorio lamp_app y sus contenidos a www-data, el usuario y grupo utilizado por el servidor web Apache.
+### Cambia el propietario y el grupo del directorio actividadlamp y sus contenidos a www-data, el usuario y grupo utilizado por el servidor web Apache.
 ````bash
-sudo chown -R www-data.www-data /var/www/lamp_app/
+sudo chown -R www-data.www-data /var/www/actividadlamp/
 ````
-### Copia el archivo de configuración por defecto de Apache, 000-default.conf, a un nuevo archivo llamado practica.conf.
+### Copia el archivo de configuración por defecto de Apache, 000-default.conf, a un nuevo archivo llamado actividadlamp.conf.
 ````bash
-sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/practica.conf
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/actividadlamp.conf
 ````
-### Utiliza sed para modificar DocumentRoot en practica.conf, apuntando al directorio lamp_app.
+### Utiliza sed para modificar DocumentRoot en actividadlamp.conf, apuntando al directorio lamp_app.
 ````bash
-sudo sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/lamp_app|' /etc/apache2/sites-available/practica.conf
+sudo sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/lamp_app|' /etc/apache2/sites-available/actividadlamp.conf
 ````
-### Habilita el nuevo sitio configurado en practica.conf.
+### Habilita el nuevo sitio configurado en actividadlamp.conf.
 ````bash
 cd /etc/apache2/sites-available/
-sudo a2ensite practica.conf
+sudo a2ensite actividadlamp.conf
 ````
 ### Deshabilita el sitio por defecto configurado en 000-default.conf.
 ````bash
@@ -58,7 +58,7 @@ sudo systemctl reload apache2
 ````
 ### Crea un archivo de configuración PHP config.php con los detalles de la conexión a la base de datos y lo guarda en el directorio de la aplicación.
 ````bash 
-cat <<EOL > /var/www/lamp_app/config.php
+cat <<EOL > /var/www/actividadlamp/config.php
 <?php
 define('DB_HOST', '192.168.55.2');
 define('DB_NAME', 'lamp_db');
@@ -73,5 +73,56 @@ EOL
 ````bash
 sudo systemctl reload apache2
 ````
+
+# **Aprovisionamiento Mysql: provmysql.sh**
+Este script actualiza la lista de paquetes e instala MySQL Server, Git y herramientas de red. Luego, inicia el servicio de MySQL, clona un repositorio desde GitHub e importa una base de datos. También crea un usuario en MySQL con permisos específicos, modifica la configuración de MySQL para permitir conexiones remotas, y reinicia el servicio para aplicar los cambios. Finalmente, ajusta la configuración de red eliminando la ruta predeterminada.
+
+### Actualizar la lista de paquetes
+````bash
+sudo apt-get update
+````
+### Instalar MySQL Server y Git
+````bash
+sudo apt-get install -y mysql-server git
+````
+### Instalar herramientas de red
+````bash
+sudo apt-get install net-tools
+````
+### Iniciar el servicio de MySQL
+````bash
+sudo service mysql start
+````
+### Clonar el repositorio de la aplicación
+````bash
+git clone https://github.com/josejuansanchez/iaw-practica-lamp.git
+```` 
+### Importar base de datos
+````bash
+sudo mysql -u root < iaw-practica-lamp/db/database.sql
+````
+### Crea un usuario llamado antonio01 con acceso desde 192.168.55.1 y la contraseña 12345, y otorga todos los privilegios en la base de datos lamp_db.
+````bash
+mysql -u root  <<EOF
+USE lamp_db;
+CREATE USER 'antonio01'@'192.168.55.1' IDENTIFIED BY '12345';
+GRANT ALL PRIVILEGES ON lamp_db.* TO 'antonio01'@'192.168.55.1';
+FLUSH PRIVILEGES;
+EOF
+````
+### Modifica la configuración de MySQL para permitir conexiones remotas desde la IP 192.168.55.2
+````bash
+sudo sed -i 's/^bind-address\s*=.*/bind-address = 192.168.55.2/' /etc/mysql/mysql.conf.d/mysqld.cnf
+````
+### Reinicia el servicio de MySQL para aplicar los cambios de configuración.
+````bash
+sudo systemctl restart mysql
+````
+### Elimina la ruta predeterminada.
+````bash
+sudo ip route del default
+````
+
+
 
 
